@@ -1,14 +1,22 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
+import table from "../views/table.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "table_view",
+    component:table,
+    children:[
+      {
+          path: "/",
+          name: "table_table",
+          component:() => import( "../components/table/table.vue"),
+      }
+    ]
   },
   {
     path: "/about",
