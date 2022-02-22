@@ -56,6 +56,7 @@
     
 </template>
 <script>
+import axios from 'axios'
 
 export default {
   data(){
@@ -86,25 +87,36 @@ export default {
       ],
 
       friends:[
-        {
-          name:'Musyoki Brilliant',
-          email:'musyoki@briliant',
-          contact:'071557575719'
-        },
-         {
-          name:'Byron Morris',
-          email:'byronm@briliant',
-          contact:'071557575719'
-        },
-         {
-          name:'Denis Muya',
-          email:'muyadenis@briliant',
-          contact:'071557575719'
-        }
+        // {
+        //   name:'Musyoki Brilliant',
+        //   email:'musyoki@briliant',
+        //   contact:'071557575719'
+        // },
+        //  {
+        //   name:'Byron Morris',
+        //   email:'byronm@briliant',
+        //   contact:'071557575719'
+        // },
+        //  {
+        //   name:'Denis Muya',
+        //   email:'muyadenis@briliant',
+        //   contact:'071557575719'
+        // }
       ]
 
       
     }
+  },
+  created(){
+    axios
+      .get("https://crudcrud.com/api/ecd8ddf876ba4d349036f58a0f9f465a/friends")
+      .then(response => {
+        // console.log(response.data)
+        this.friends = response.data
+      })
+      .catch(error => {
+        console.log('There was an error' + error.response)
+      })
   },
   methods:{
       onSubmit(){
