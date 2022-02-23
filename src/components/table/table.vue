@@ -1,5 +1,5 @@
 <template>
- <v-container>""
+ <v-container>
    <v-row>
      <v-form @submit.prevent="onSubmit">
        <v-col>
@@ -120,17 +120,37 @@ export default {
   },
   methods:{
       onSubmit(){
-        let friend= {
-         name: this.name,
-         email: this.email,
-         contact: this.contact
-        }
+        // let friend= {
+        //  name: this.name,
+        //  email: this.email,
+        //  contact: this.contact
+        // }
         
-        this.friends.push(friend)
+        axios
+          .post(
+            "https://crudcrud.com/api/ecd8ddf876ba4d349036f58a0f9f465a/friends",
+            { name : this.name , email : this.email, contact : this.contact },
+            )
+          .then(response =>{
+            console.log(response)
+          })
+          .catch(error => {
+            console.log('ERROR in the POST Request' + error.response)
+          })
+        // this.friends.push(friend)
 
       this.name = ''
       this.email = ''
       this.contact = ''
+      },
+
+      putRequest(){
+        axios
+        .put("https://crudcrud.com/api/ecd8ddf876ba4d349036f58a0f9f465a/friends/`${friends.id}`",{
+          name : 'name',
+          date : 'date'
+        })
+
       }
     }
 }
